@@ -53,25 +53,25 @@ Fixed navbar -->
       <td><?php echo $list->email ?></td>
       <td><?php 
       if($list->skema_sertifikasi == '1'){
-        echo 'Programmer Madya';
+        echo anchor('crud/laporan/skema_sertifikasi/'.$list->skema_sertifikasi, 'Programmer Madya');
       }
       elseif ($list->skema_sertifikasi== '2') {
-        echo 'Network Administrator';
+        echo anchor('crud/laporan/skema_sertifikasi/'.$list->skema_sertifikasi, 'Network Administrator');
       }
       elseif ($list->skema_sertifikasi== '3') {
-        echo 'Multimedia Madya';
+        echo anchor('crud/laporan/skema_sertifikasi/'.$list->skema_sertifikasi, 'Multimedia Madya');
       }
 
       ?></td>
       <td><?php 
       if($list->tmpt_uji == '1'){
-        echo 'Jambi';
+        echo anchor('crud/laporan/tmpt_uji/'.$list->tmpt_uji, 'Jambi');
       }
-      elseif ($list->skema_sertifikasi== '2') {
-        echo 'Padang';
+      elseif ($list->tmpt_uji== '2') {
+        echo anchor('crud/laporan/tmpt_uji/'.$list->tmpt_uji, 'Padang');
       }
-      elseif ($list->skema_sertifikasi== '3') {
-        echo 'Lampung';
+      elseif ($list->tmpt_uji== '3') {
+        echo anchor('crud/laporan/tmpt_uji/'.$list->tmpt_uji, 'Lampung');
       }?></td>
       <td><?php 
       if($list->rekomendasi == '1'){
@@ -80,26 +80,14 @@ Fixed navbar -->
       elseif ($list->rekomendasi== '0') {
         echo 'Tidak';
       } ?></td>
-      <td><?php echo $list->tanggal_terbit_sertifikasi ?></td>
-      <td><?php echo $list->tanggal_lahir ?></td>
+      <td><?php echo anchor('crud/laporan/tanggal_terbit_sertifikasi/'.$list->tanggal_terbit_sertifikasi, $list->tanggal_terbit_sertifikasi) ?></td>
+      <td><?php echo anchor('laporan/'.$list->tanggal_lahir, $list->tanggal_lahir) ?></td>
       <td><?php echo $list->organisasi ?></td>
       <td><?php echo anchor('crud/edit/'.$list->kode_peserta,'Edit'); ?> <?php echo anchor('crud/hapus/'.$list->kode_peserta,'Hapus'); ?></td>
     </tr>
     <?php } ?>
   </table>
 <p>Jumlah Data : <?php  echo $this->db 
-                    ->count_all_results('tb_peserta'); ?> Orang</p>
-<p>Jumlah Skema Programmer Madya: <?php  echo $this->db
-                    ->where('skema_sertifikasi','1')
-                    ->count_all_results('tb_peserta'); ?> Orang || Jumlah Skema Netwok Administrator: <?php  echo $this->db
-                    ->where('skema_sertifikasi','2')
-                    ->count_all_results('tb_peserta'); ?> Orang || Jumlah Skema Multimedia Madya : <?php  echo $this->db
-                    ->where('skema_sertifikasi','3')
-                    ->count_all_results('tb_peserta'); ?> Orang</p>
-<p>Jumlah Peserta Rekomendasi : <?php  echo $this->db
-                    ->where('rekomendasi','0')
-                    ->count_all_results('tb_peserta'); ?> Orang || Jumlah Peserta Tidak Di Rekomendasi : <?php  echo $this->db
-                    ->where('rekomendasi','1')
                     ->count_all_results('tb_peserta'); ?> Orang</p>
 
 

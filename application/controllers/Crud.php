@@ -53,14 +53,63 @@ class Crud extends CI_Controller{
 		redirect('index');
 	}
 	function edit($kode_peserta){
+		$data = array(
+			'page_title' => 'Edit Data'
+		);
 	$where = array('kode_peserta' => $kode_peserta);
 	$data['tampil'] = $this->m_data->edit_data($where,'tb_peserta')->result();
-	$this->load->view('v_edit',$data);
+	$this->_render_page('v_edit.php',$data);
+	}
+	function update(){
+		$nama = $this->input->post('nama');
+		$nik = $this->input->post('nik');
+		$no_hp = $this->input->post('no_hp');
+		$email = $this->input->post('email');
+		$skema_sertifikasi = $this->input->post('skema_sertifikasi');
+		$tmpt_uji = $this->input->post('tmpt_uji');
+		$rekomendasi = $this->input->post('rekomendasi');
+		$tanggal_terbit_sertifikasi = $this->input->post('tanggal_terbit_sertifikasi');
+		$tanggal_lahir = $this->input->post('tanggal_lahir');
+		$organisasi = $this->input->post('organisasi');
+ 
+	$data = array(
+		'nama' => $nama,
+			'nik' => $nik,
+			'no_hp' => $no_hp,
+			'email' => $email,
+			'skema_sertifikasi' => $skema_sertifikasi,
+			'tmpt_uji' => $tmpt_uji,
+			'rekomendasi' => $rekomendasi,
+			'tanggal_terbit_sertifikasi' => $tanggal_terbit_sertifikasi,
+			'tanggal_lahir' => $tanggal_lahir,
+			'organisasi' => $organisasi
+	);
+ 
+	$where = array(
+		'kode_peserta' => $kode_peserta
+	);
+ 
+	$this->m_data->update_data($where,$data,'tb_peserta');
+	redirect('index');
 	}
 	function hapus($kode_peserta){
 		$where = array('kode_peserta' => $kode_peserta);
 		$this->m_data->hapus_data($where,'tb_peserta');
 		redirect('index');
+	}
+	function laporan($nama_kolom,$value_kolom)
+	{
+
+		$data = array(
+			'page_title' => 'Laporan Data Peserta'
+		);
+		$where = array($nama_kolom => $value_kolom);
+		$data['tampil'] = $this->m_data->edit_data($where,'tb_peserta')->result();
+		$data['jumlah'] = $this->db 
+		->where($nama_kolom,$value_kolom)
+        ->count_all_results('tb_peserta');
+
+		$this->_render_page('v_laporan.php', $data);
 	}
  
 }

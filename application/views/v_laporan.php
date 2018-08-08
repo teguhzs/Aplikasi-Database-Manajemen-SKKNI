@@ -25,8 +25,8 @@ Fixed navbar -->
   <div class="page-header">
     <h1>Data Peserta Sertifikasi</h1>
   </div>
-  <center><?php echo anchor('crud','Tambah Data'); ?></center>
-  <table class="table table-bordered" style="margin:20px auto;" border="1">
+  <center><?php echo anchor('index','Kembali'); ?></center>
+  <table id="tabel_peserta" class="table table-bordered" style="margin:20px auto;" border="1">
     <tr>
       <th>No</th>
       <th>Nama</th>
@@ -39,6 +39,7 @@ Fixed navbar -->
       <th>Tanggal Terbit Sertifikasi</th>
       <th>Tanggal Lahir</th>
       <th>Organisasi</th>
+      <th>Aksi</th>
     </tr>
     <?php 
     $no = 1;
@@ -66,10 +67,10 @@ Fixed navbar -->
       if($list->tmpt_uji == '1'){
         echo 'Jambi';
       }
-      elseif ($list->skema_sertifikasi== '2') {
+      elseif ($list->tmpt_uji== '2') {
         echo 'Padang';
       }
-      elseif ($list->skema_sertifikasi== '3') {
+      elseif ($list->tmpt_uji== '3') {
         echo 'Lampung';
       }?></td>
       <td><?php 
@@ -82,12 +83,12 @@ Fixed navbar -->
       <td><?php echo $list->tanggal_terbit_sertifikasi ?></td>
       <td><?php echo $list->tanggal_lahir ?></td>
       <td><?php echo $list->organisasi ?></td>
-      <td>
-            
-      </td>
+      <td><?php echo anchor('crud/edit/'.$list->kode_peserta,'Edit'); ?> <?php echo anchor('crud/hapus/'.$list->kode_peserta,'Hapus'); ?></td>
     </tr>
     <?php } ?>
   </table>
+<p>Jumlah Data : <?php  echo $jumlah; ?> Orang</p>
+
 
 
 </div> <!-- /container
